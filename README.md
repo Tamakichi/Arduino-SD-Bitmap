@@ -111,12 +111,4 @@ SPI接続のSDカードの初期化を利用前に行う必要があります。
 サンプルスケッチ内の関数`test1()`では、画像ファイル`LOGO2.BMP`を全てロードしてそのパターンを表示しています。  
 サンプルスケッチ内の関数`test2()`では、画像ファイル`LOGO1.BMP`を部分ロードしてそのパターンを表示しています。  
 
-画像ファイル  
-LOGO1.BMP  
-<img src="img/logo1.jpg">  
-LOGO2.BMP  
-<img src="img/logo2.jpg">  
-
-サンプルスケッチの実行結果  
-<img src="img/sample.jpg">  
 
