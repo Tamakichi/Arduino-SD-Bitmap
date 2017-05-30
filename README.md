@@ -81,8 +81,8 @@ SPI接続のSDカードの初期化を利用前に行う必要があります。
     mode：モード設定 0:無加工 1:反転  
 
 - ビットマップデータの切り出し取得(高速版)  
-	`int8_t getBitmap(uint8_t*bmp, uint16_t x, uint16_t y, uint8_t w, uint8_t h, uint8_t mode)`  
-  現在オープンしているビットマップファイル画像データを部分取得します。  
+	`int8_t getBitmap(uint8_t*bmp, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t mode)`  
+  現在オープンしているビットマップファイル画像データを部分取得します。  
 
   引数  
     bmp ：画像データ格納アドレス  
@@ -95,7 +95,7 @@ SPI接続のSDカードの初期化を利用前に行う必要があります。
   ※高速化のためにバイト単位で取り出します。そのためx、wは8の倍数である必要があります。  
 
 - ビットマップデータの切り出し取得  
-	`int8_t getBitmapEx(uint8_t*bmp, uint16_t x, uint16_t y, uint8_t w, uint8_t h, uint8_t mode)`  
+	`int8_t getBitmapEx(uint8_t*bmp, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t mode)`  
   現在オープンしているビットマップファイル画像データを部分取得します。  
   
   引数  
