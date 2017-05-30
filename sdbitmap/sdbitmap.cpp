@@ -2,6 +2,7 @@
 // sdbitmap.cpp
 // ビットマップファイル操作クラス
 // 2016/06/21 たま吉さん
+// 2017/04/30,修正,オーバーフロー対応(unt8_tをuint16_tに変更)
 //
 
 #include "sdbitmap.h"
@@ -214,7 +215,7 @@ uint8_t sdbitmap::getBitmap(uint8_t*bmp, uint8_t mode) {
 //  0:     正常終了
 //  0以外  異常終了
 // 
-uint8_t sdbitmap::getBitmap(uint8_t*bmp, uint16_t x, uint16_t y, uint8_t w, uint8_t h, uint8_t mode) {
+uint8_t sdbitmap::getBitmap(uint8_t*bmp, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t mode) {
   uint32_t pos = 0;
   uint16_t ptr = 0;
 
@@ -293,7 +294,7 @@ uint8_t sdbitmap::getByte(uint16_t x, uint16_t y) {
 //  0:     正常終了
 //  0以外  異常終了
 // 
-uint8_t sdbitmap::getBitmapEx(uint8_t*bmp, uint16_t x, uint16_t y, uint8_t w, uint8_t h, uint8_t mode) {
+uint8_t sdbitmap::getBitmapEx(uint8_t*bmp, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t mode) {
   // ラインループ
   uint16_t ptr = 0;
   uint8_t d;
