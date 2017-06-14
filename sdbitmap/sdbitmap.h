@@ -2,6 +2,8 @@
 // sdbitmap.h
 // ビットマップファイル操作クラス
 // 2016/06/21 たま吉さん
+// 2017/04/30,修正,オーバーフロー対応(unt8_tをuint16_tに変更)
+// 2017/06/08,修正,getBitmap()に引数追加、幅指定不具合対応
 //
 
 #ifndef __SDBITMAP_H__
@@ -41,7 +43,7 @@ class sdbitmap {
   
 	uint8_t getBitmap(uint8_t*bmp,    		    // ビットマップデータの切り出し取得(高速版)
 	  uint16_t x, uint16_t y, 
-	  uint16_t w, uint16_t h, uint8_t mode);
+	  uint16_t w, uint16_t h, uint8_t mode, uint16_t offset=0);
 
   uint8_t getBitmapEx(uint8_t*bmp,              // ビットマップデータの切り出し取得
     uint16_t x, uint16_t y, 

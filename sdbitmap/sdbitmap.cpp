@@ -3,6 +3,7 @@
 // ビットマップファイル操作クラス
 // 2016/06/21 たま吉さん
 // 2017/04/30,修正,オーバーフロー対応(unt8_tをuint16_tに変更)
+// 2017/06/08,修正,getBitmap()に引数追加、幅指定不具合対応
 //
 
 #include "sdbitmap.h"
@@ -198,7 +199,7 @@ uint32_t sdbitmap::getImageSize() {
 //  0以外  異常終了
 //
 uint8_t sdbitmap::getBitmap(uint8_t*bmp, uint8_t mode) {
-  getBitmap(bmp, 0, 0, _bmpWidth, _bmpHeight, mode);
+  return getBitmap(bmp, 0, 0, _bmpWidth, _bmpHeight, mode);
 }
 
 
@@ -211,14 +212,22 @@ uint8_t sdbitmap::getBitmap(uint8_t*bmp, uint8_t mode) {
 //  w   : 取り出し幅 (8の倍数であること）
 //  h   : 取り出し高さ
 //  mode: 0:通常 1:反転
+//  offset: 次のラインの位置移動用のオフセット(デフォルト=0)
 // 戻り値
 //  0:     正常終了
 //  0以外  異常終了
 // 
-uint8_t sdbitmap::getBitmap(uint8_t*bmp, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t mode) {
+uint8_t sdbitmap::getBitmap(uint8_t*bmp, uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t mode,uint16_t offset) {
   uint32_t pos = 0;
   uint16_t ptr = 0;
 
+  if (x+w > _bmpWidth) {
+	 w = _bmpWidth - x;
+  }
+
+  if (y+h > _bmpHeight) {
+	 h = _bmpHeight - y;
+  }
   uint16_t bx = x>>3;
   uint16_t bw = (w+7)>>3;
   uint8_t bit_w = w & 7;
@@ -245,7 +254,9 @@ uint8_t sdbitmap::getBitmap(uint8_t*bmp, uint16_t x, uint16_t y, uint16_t w, uin
   	
     if (bit_w && ptr) // 8の倍数でない
       bmp[ptr-1] &= 0xff<<(8-bit_w);
+  	if(offset) ptr+=offset-bw;
   }
+  return 0;
 }
 
 //
@@ -306,7 +317,5 @@ uint8_t sdbitmap::getBitmapEx(uint8_t*bmp, uint16_t x, uint16_t y, uint16_t w, u
     if (bit_w && w > 8) // 右端の端数ビットの補正
       bmp[ptr-1] &= 0xff<<(8-bit_w);
   }  
+  return 0;
 }
-
-
-
